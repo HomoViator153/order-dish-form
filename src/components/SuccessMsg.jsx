@@ -19,7 +19,17 @@ const SuccessMsg = ({ isListShown, responseFromServer, setIsListShown }) => {
     const keysArray = Object.keys(acurateData);
     const valuesArray = Object.values(acurateData);
 
-    const renderList = keysArray.map((item, index) => (
+    const keysArrayFinal = keysArray.map((item) => {
+      if (item === "name") return "Dish name";
+      else if (item === "preparation_time") return "Preparation time";
+      else if (item === "type") return "Dish type";
+      else if (item === "no_of_slices") return "Number of slices";
+      else if (item === "diameter") return "Diameter";
+      else if (item === "spiciness_scale") return "Spiciness";
+      else if (item === "slices_of_bread") return "Slices of bread";
+    });
+
+    const renderList = keysArrayFinal.map((item, index) => (
       <p key={item} className="list_element-container">
         <span className="key_item">{item}: </span>
         <span className="value_item">{valuesArray[index]}</span>
