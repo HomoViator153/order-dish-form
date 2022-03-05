@@ -12,6 +12,8 @@ const BasicForm = (props) => {
     }));
   };
 
+  const preparationTimeValidation = () => (preparation_time === "00:00:00" ? "00:00:01" : "0");
+
   return (
     <>
       <label htmlFor="name">Dish name: </label>
@@ -29,6 +31,7 @@ const BasicForm = (props) => {
         type="time"
         value={preparation_time}
         onChange={handleOnChange}
+        min={preparationTimeValidation()}
         name="preparation_time"
         id="preparation_time"
         step="2"
