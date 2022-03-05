@@ -39,7 +39,7 @@ const BasicForm = (props) => {
         value={type}
         onChange={(e) => {
           handleOnChange(e);
-          if (isDishTypeSet) setIsDishTypeSet(true);
+          if (!isDishTypeSet) setIsDishTypeSet(true);
         }}
         id="type"
         required>
