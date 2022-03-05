@@ -27,6 +27,7 @@ const App = () => {
     } catch (err) {
       console.error(err);
     }
+    resetFormState();
   };
 
   const postFormData = async (formData) => {
@@ -57,6 +58,20 @@ const App = () => {
     const response = await fetch(url, fetchParameters);
 
     return response.json();
+  };
+
+  const resetFormState = () => {
+    setIsDishTypeSet(false);
+    setFormState((formState) => ({
+      ...formState,
+      name: "",
+      diameter: "",
+      type: "",
+      no_of_slices: "",
+      preparation_time: "00:00:00",
+      slices_of_bread: "",
+      spiciness_scale: 1,
+    }));
   };
 
   return (
