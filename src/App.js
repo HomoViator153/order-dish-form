@@ -4,8 +4,11 @@ import { useState } from "react";
 import BasicForm from "./components/BasicForm";
 import ConditionalForm from "./components/ConditionalForm";
 
+const url = "http://localhost:3000/posts";
+
 const App = () => {
   const [isDishTypeSet, setIsDishTypeSet] = useState(false);
+  const [responseFromServer, setResponseFromServer] = useState({});
   const [formState, setFormState] = useState({
     name: "",
     preparation_time: "00:00:00",
@@ -15,9 +18,50 @@ const App = () => {
     spiciness_scale: 1,
     slices_of_bread: "",
   });
+
+  const handleSubmitForm = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await postFormData(formState);
+      setResponseFromServer(response);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const postFormData = async (formData) => {
+    let acurateData;
+
+    if (formState.type === "pizza") {
+      const { slices_of_bread, spiciness_scale, ...pizzaData } = formData;
+      acurateData = pizzaData;
+    } else if (formState.type === "soup") {
+      const { slices_of_bread, diameter, no_of_slices, ...soupData } = formData;
+      acurateData = soupData;
+    } else if (formState.type === "sandwich") {
+      const { spiciness_scale, diameter, no_of_slices, ...sandwichData } = formData;
+      acurateData = sandwichData;
+    }
+
+    const JsonFormData = JSON.stringify(acurateData);
+
+    const fetchParameters = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JsonFormData,
+    };
+
+    const response = await fetch(url, fetchParameters);
+
+    return response.json();
+  };
+
   return (
     <main className="form-container">
-      <form action="" method="POST">
+      <form onSubmit={handleSubmitForm}>
         <BasicForm
           formState={formState}
           setFormState={setFormState}
