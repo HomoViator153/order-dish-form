@@ -6,7 +6,7 @@ import ConditionalForm from "./components/ConditionalForm";
 import SuccessMsg from "./components/SuccessMsg";
 import FailureMsg from "./components/FailureMsg";
 
-const url = "http://localhost:3000/postsasd";
+const url = "http://localhost:3000/posts";
 
 const App = () => {
   const [isDishTypeSet, setIsDishTypeSet] = useState(false);
@@ -102,7 +102,11 @@ const App = () => {
         {isDishTypeSet && <ConditionalForm formState={formState} setFormState={setFormState} />}
         <button type="submit">Order</button>
       </form>
-      <SuccessMsg isListShown={isListShown} />
+      <SuccessMsg
+        responseFromServer={responseFromServer}
+        isListShown={isListShown}
+        setIsListShown={setIsListShown}
+      />
       <FailureMsg />
     </main>
   );
