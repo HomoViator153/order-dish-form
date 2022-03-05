@@ -79,6 +79,17 @@ option {
   transform: scale(0.97);
 }
 
+.success_msg-outer_container,
+.failure_msg-outer_container {
+  display: none;
+  font-family: "Open sans", sans-serif;
+  font-size: 1.1rem;
+}
+
+.active {
+  display: block;
+}
+
 /* hide default input:number arrows */
 /* Chrome, Opera, Safari, Edge */
 input::-webkit-outer-spin-button,

@@ -3,12 +3,15 @@ import { useState } from "react";
 
 import BasicForm from "./components/BasicForm";
 import ConditionalForm from "./components/ConditionalForm";
+import SuccessMsg from "./components/SuccessMsg";
+import FailureMsg from "./components/FailureMsg";
 
-const url = "http://localhost:3000/posts";
+const url = "http://localhost:3000/postsasd";
 
 const App = () => {
   const [isDishTypeSet, setIsDishTypeSet] = useState(false);
   const [responseFromServer, setResponseFromServer] = useState({});
+  const [isListShown, setIsListShown] = useState(false);
   const [formState, setFormState] = useState({
     name: "",
     preparation_time: "00:00:00",
@@ -56,8 +59,21 @@ const App = () => {
     };
 
     const response = await fetch(url, fetchParameters);
+    displayMsg(response);
 
     return response.json();
+  };
+
+  const displayMsg = (response) => {
+    if (isListShown) setIsListShown(false);
+    if (response.ok) {
+      document.querySelector(".success_msg-outer_container").classList.add("active");
+      document.querySelector(".failure_msg-outer_container").classList.remove("active");
+    } else {
+      document.querySelector(".failure_msg-outer_container").classList.add("active");
+      document.querySelector(".success_msg-outer_container").classList.remove("active");
+      console.error(response);
+    }
   };
 
   const resetFormState = () => {
@@ -86,6 +102,8 @@ const App = () => {
         {isDishTypeSet && <ConditionalForm formState={formState} setFormState={setFormState} />}
         <button type="submit">Order</button>
       </form>
+      <SuccessMsg isListShown={isListShown} />
+      <FailureMsg />
     </main>
   );
 };
