@@ -6,7 +6,7 @@ import ConditionalForm from "./components/ConditionalForm";
 import SuccessMsg from "./components/SuccessMsg";
 import FailureMsg from "./components/FailureMsg";
 
-const url = "http://localhost:3000/posts";
+const url = "https://frosty-wood-6558.getsandbox.com:443/dishes";
 
 const App = () => {
   const [isDishTypeSet, setIsDishTypeSet] = useState(false);
