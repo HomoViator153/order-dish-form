@@ -1,25 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
 
-function App() {
+import BasicForm from "./components/BasicForm";
+import ConditionalForm from "./components/ConditionalForm";
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main className="form-container">
+      <form action="" method="POST">
+        <BasicForm />
+        <ConditionalForm />
+        <button type="submit">Order</button>
+      </form>
+    </main>
   );
-}
+};
 
 export default App;
