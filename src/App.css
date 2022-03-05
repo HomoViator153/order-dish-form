@@ -86,6 +86,34 @@ option {
   font-size: 1.1rem;
 }
 
+.success_msg-container,
+.failure_msg-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+p.success_submit {
+  color: rgb(111, 255, 159);
+}
+
+p.failure_submit {
+  color: rgb(255, 106, 106);
+}
+
+.success_msg-span {
+  cursor: pointer;
+}
+
+.details-container {
+  margin-top: 10px;
+}
+
+.list_element-container {
+  line-height: 1.5;
+}
+
 .active {
   display: block;
 }
