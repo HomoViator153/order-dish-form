@@ -2,6 +2,23 @@ import React from "react";
 
 const ConditionalForm = (props) => {
   const { type, no_of_slices, diameter, spiciness_scale, slices_of_bread } = props.formState;
+  const { setFormState } = props;
+
+  const handleOnChange = (e) => {
+    const { value, name } = e.target;
+
+    if (name === "name" || name === "type" || name === "preparation_time") {
+      setFormState((formState) => ({
+        ...formState,
+        [name]: value,
+      }));
+    } else {
+      setFormState((formState) => ({
+        ...formState,
+        [name]: Number(value),
+      }));
+    }
+  };
 
   const renderConditionalForm = () => {
     if (type === "") return;
@@ -19,6 +36,7 @@ const ConditionalForm = (props) => {
           id="no_of_slices"
           type="number"
           value={no_of_slices}
+          onChange={handleOnChange}
           max="50"
           min="1"
           name="no_of_slices"
@@ -29,6 +47,7 @@ const ConditionalForm = (props) => {
           id="diameter"
           type="number"
           value={diameter}
+          onChange={handleOnChange}
           max="100"
           min="10"
           name="diameter"
@@ -49,6 +68,7 @@ const ConditionalForm = (props) => {
             id="spiciness_scale"
             type="range"
             value={spiciness_scale}
+            onChange={handleOnChange}
             max="10"
             min="1"
             name="spiciness_scale"
@@ -68,6 +88,7 @@ const ConditionalForm = (props) => {
           id="slices_of_bread"
           type="number"
           value={slices_of_bread}
+          onChange={handleOnChange}
           max="10"
           min="1"
           name="slices_of_bread"
